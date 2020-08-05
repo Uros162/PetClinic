@@ -1,9 +1,10 @@
-package urketa.spring.petclinic.petclinic;
+package petclinic;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import urketa.spring.petclinic.petclinic.PetClinicApplication;
 
-@SpringBootTest
+@SpringBootTest(classes = {PetClinicApplication.class})
 class PetClinicApplicationTests {
 
     @Test
