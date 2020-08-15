@@ -1,6 +1,6 @@
 package urketa.spring.petclinic.petclinic.model;
 
-public class Person {
+public class Person extends BaseEntity{
     private String firstname;
     private String lastname;
 
