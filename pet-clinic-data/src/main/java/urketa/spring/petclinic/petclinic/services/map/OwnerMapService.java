@@ -3,10 +3,11 @@ package urketa.spring.petclinic.petclinic.services.map;
 
 import urketa.spring.petclinic.petclinic.model.Owner;
 import urketa.spring.petclinic.petclinic.services.CRUDService;
+import urketa.spring.petclinic.petclinic.services.OwnerService;
 
 import java.util.Set;
 
-public class OwnerMapService extends AbstractMapService<Owner,Long> implements CRUDService<Owner,Long>{
+public class OwnerMapService extends AbstractMapService<Owner,Long> implements OwnerService {
 
     @Override
     public Owner findById(Long id) {
@@ -32,5 +33,10 @@ public class OwnerMapService extends AbstractMapService<Owner,Long> implements C
     @Override
     public void delete(Owner owner) {
         super.delete(owner);
+    }
+
+    @Override
+    public Owner findByLastName(String lastname) {
+        return null;
     }
 }
