@@ -1,12 +1,14 @@
 package urketa.spring.petclinic.petclinic.services.map;
 
 
+import org.springframework.stereotype.Service;
 import urketa.spring.petclinic.petclinic.model.Owner;
 import urketa.spring.petclinic.petclinic.services.CRUDService;
 import urketa.spring.petclinic.petclinic.services.OwnerService;
 
 import java.util.Set;
 
+@Service
 public class OwnerMapService extends AbstractMapService<Owner,Long> implements OwnerService {
 
     @Override

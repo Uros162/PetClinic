@@ -1,5 +1,6 @@
 package urketa.spring.petclinic.petclinic.services.map;
 
+import org.springframework.stereotype.Service;
 import urketa.spring.petclinic.petclinic.model.Owner;
 import urketa.spring.petclinic.petclinic.model.Vet;
 import urketa.spring.petclinic.petclinic.services.OwnerService;
@@ -7,6 +8,7 @@ import urketa.spring.petclinic.petclinic.services.VetService;
 
 import java.util.Set;
 
+@Service
 public class VetMapService extends AbstractMapService<Vet,Long> implements VetService {
     @Override
     public Vet findById(Long id) {

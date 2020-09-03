@@ -1,6 +1,7 @@
 package urketa.spring.petclinic.petclinic.bootstrap;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 import urketa.spring.petclinic.petclinic.model.Owner;
 import urketa.spring.petclinic.petclinic.model.Vet;
 import urketa.spring.petclinic.petclinic.services.OwnerService;
@@ -8,15 +9,15 @@ import urketa.spring.petclinic.petclinic.services.VetService;
 import urketa.spring.petclinic.petclinic.services.map.OwnerMapService;
 import urketa.spring.petclinic.petclinic.services.map.VetMapService;
 
+@Component
 public class DataLoader implements CommandLineRunner {
 
-    private OwnerService ownerService;
-    private VetService vetService;
+    private final OwnerService ownerService;
+    private final VetService vetService;
 
-    public DataLoader() {
-
-        ownerService = new OwnerMapService();
-        vetService = new VetMapService();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
