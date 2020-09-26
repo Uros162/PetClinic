@@ -9,6 +9,8 @@ public class Visit extends BaseEntity{
     private Pet pet;
 
 
+
+
     public LocalDate getLocalDate() {
         return localDate;
     }
