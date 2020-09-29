@@ -3,13 +3,24 @@ package urketa.spring.petclinic.petclinic.services.map;
 
 import org.springframework.stereotype.Service;
 import urketa.spring.petclinic.petclinic.model.Owner;
+import urketa.spring.petclinic.petclinic.model.Pet;
 import urketa.spring.petclinic.petclinic.services.CRUDService;
 import urketa.spring.petclinic.petclinic.services.OwnerService;
+import urketa.spring.petclinic.petclinic.services.PetService;
+import urketa.spring.petclinic.petclinic.services.PetTypeService;
 
 import java.util.Set;
 
 @Service
 public class OwnerMapService extends AbstractMapService<Owner,Long> implements OwnerService {
+
+    private final PetTypeService petTypeService;
+    private final PetService petService;
+
+    public OwnerMapService(PetTypeService petTypeService, PetService petService) {
+        this.petTypeService = petTypeService;
+        this.petService = petService;
+    }
 
     @Override
     public Owner findById(Long id) {
@@ -18,7 +29,26 @@ public class OwnerMapService extends AbstractMapService<Owner,Long> implements O
 
     @Override
     public Owner save(Owner owner) {
-        return super.save(owner);
+
+        if (owner != null){
+            if(owner.getPets() != null){
+                owner.getPets().forEach(pet ->{if(pet.getPetType() != null){
+                if(pet.getPetType().getId() == null){
+                    pet.setPetType(petTypeService.save(pet.getPetType()));
+                }else{
+                    throw new RuntimeException("Type is requred");
+                }
+                if(pet.getId() == null){
+                    Pet savedPet = petService.save(pet);
+                    pet.setId(savedPet.getId());
+
+                }
+                }
+                });
+            }
+            return super.save(owner);
+        }
+        return null;
     }
 
     @Override
