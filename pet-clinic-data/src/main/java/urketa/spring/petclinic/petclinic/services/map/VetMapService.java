@@ -2,14 +2,22 @@ package urketa.spring.petclinic.petclinic.services.map;
 
 import org.springframework.stereotype.Service;
 import urketa.spring.petclinic.petclinic.model.Owner;
+import urketa.spring.petclinic.petclinic.model.Speciality;
 import urketa.spring.petclinic.petclinic.model.Vet;
 import urketa.spring.petclinic.petclinic.services.OwnerService;
+import urketa.spring.petclinic.petclinic.services.SpecialitiesService;
 import urketa.spring.petclinic.petclinic.services.VetService;
 
 import java.util.Set;
 
 @Service
 public class VetMapService extends AbstractMapService<Vet,Long> implements VetService {
+   private final SpecialitiesService specialitiesService;
+
+    public VetMapService(SpecialitiesService specialitiesService) {
+        this.specialitiesService = specialitiesService;
+    }
+
     @Override
     public Vet findById(Long id) {
         return super.findById(id);
@@ -17,6 +25,14 @@ public class VetMapService extends AbstractMapService<Vet,Long> implements VetSe
 
     @Override
     public Vet save(Vet vet) {
+        if (vet.getSpecialities().size() > 0){
+            vet.getSpecialities().forEach(speciality -> {
+                if (speciality.getId() == null){
+                    Speciality savedSpeciality = specialitiesService.save(speciality);
+                    speciality.setId(savedSpeciality.getId());
+                }
+            });
+        }
         return super.save(vet);
     }
 
