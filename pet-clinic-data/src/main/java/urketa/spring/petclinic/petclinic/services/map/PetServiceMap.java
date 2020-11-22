@@ -1,5 +1,6 @@
 package urketa.spring.petclinic.petclinic.services.map;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import urketa.spring.petclinic.petclinic.model.Pet;
 import urketa.spring.petclinic.petclinic.services.PetService;
@@ -7,6 +8,7 @@ import urketa.spring.petclinic.petclinic.services.PetService;
 import java.util.Set;
 
 @Service
+@Profile({"default","map"})
 public class PetServiceMap extends AbstractMapService<Pet,Long>implements PetService {
     @Override
     public Pet findById(Long id) {
